@@ -114,7 +114,7 @@ fun LoginScreen(
                     OutlinedTextField(
                         value = state.emailInput,
                         onValueChange = viewModel::onEmailChange,
-                        label = { Text("E-mail do Usuário") },
+                        label = { Text("Usuário (e-mail)") },
                         leadingIcon = { Icon(Icons.Default.Email, contentDescription = null) },
                         modifier = Modifier.fillMaxWidth(),
                         singleLine = true,
