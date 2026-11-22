@@ -12,7 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.exemplo.oficina.ui.navigation.AppNavigation
-import com.example.trabalhoedivaldo.ui.theme.TrabalhoEdivaldoTheme
+import com.exemplo.oficina.ui.theme.TrabalhoEdivaldoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

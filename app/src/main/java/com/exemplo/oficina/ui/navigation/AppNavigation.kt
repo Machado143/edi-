@@ -147,7 +147,7 @@ fun AppNavigation(
                     navController.navigate(Screen.OrdemServicoDetail.createRoute(osId))
                 },
                 onNavigateToForm = {
-                    navController.navigate(Screen.OrdemServicoForm.route)
+                    navController.navigate(Screen.OrdemServicoForm.createRoute())
                 },
                 onNavigateBack = { navController.popBackStack() }
             )
@@ -165,8 +165,13 @@ fun AppNavigation(
             )
         }
 
-        composable(Screen.OrdemServicoForm.route) {
+        composable(
+            route = Screen.OrdemServicoForm.route,
+            arguments = listOf(navArgument("osId") { type = NavType.IntType; defaultValue = -1 })
+        ) { backStackEntry ->
+            val osIdArg = backStackEntry.arguments?.getInt("osId") ?: -1
             OrdemServicoFormScreen(
+                osId = if (osIdArg == -1) null else osIdArg,
                 viewModel = ordemServicoViewModel,
                 onNavigateBack = { navController.popBackStack() }
             )

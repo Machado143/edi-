@@ -49,7 +49,7 @@ object StatusOS {
 data class OrdemServico(
     val id: Int? = null,
     val veiculoId: Int,
-    val usuarioId: Int,
+    val usuarioId: Int? = null,
     val status: String = StatusOS.ABERTA,
     val dataAbertura: String,
     val observacoes: String = "",

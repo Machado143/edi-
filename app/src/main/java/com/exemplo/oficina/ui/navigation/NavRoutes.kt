@@ -10,6 +10,8 @@ sealed class Screen(val route: String, val title: String) {
     object OrdemServicoDetail : Screen("ordem_detail/{osId}", "Detalhes da OS") {
         fun createRoute(osId: Int) = "ordem_detail/$osId"
     }
-    object OrdemServicoForm : Screen("ordem_form", "Nova Ordem de Serviço")
+    object OrdemServicoForm : Screen("ordem_form?osId={osId}", "Nova Ordem de Serviço") {
+        fun createRoute(osId: Int? = null) = if (osId == null) "ordem_form" else "ordem_form?osId=$osId"
+    }
     object Settings : Screen("configuracoes", "Configurações Server REST")
 }

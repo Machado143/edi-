@@ -1,4 +1,4 @@
-package com.example.trabalhoedivaldo.ui.theme
+package com.exemplo.oficina.ui.theme
 
 import android.app.Activity
 import android.os.Build

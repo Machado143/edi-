@@ -114,6 +114,15 @@ class OrdemServicoViewModel(
         }
     }
 
+    fun alterarStatus(id: Int, status: String) {
+        viewModelScope.launch {
+            when (val result = ordemServicoRepository.updateStatus(id, status)) {
+                is NetworkResult.Success -> loadOrdens()
+                is NetworkResult.Error -> _listState.update { it.copy(errorMessage = result.message) }
+                is NetworkResult.Loading -> {}
+            }
+        }
+    }
     private fun sortOrdensList() {
         val currentOrdens = _listState.value.ordens
         val sorted = when (_listState.value.defaultSortMode) {
@@ -336,7 +345,6 @@ class OrdemServicoViewModel(
         val ordem = OrdemServico(
             id = s.id,
             veiculoId = veiculoId!!,
-            usuarioId = 2,
             status = s.status,
             dataAbertura = dataHoje,
             observacoes = s.observacoesInput.trim()
