@@ -145,6 +145,25 @@ fun VeiculoScreen(
     if (state.isFormOpen) {
         VeiculoFormDialog(state = state, viewModel = viewModel)
     }
+
+    // AlertDialog de Confirmação de Exclusão
+    state.veiculoParaExcluir?.let { veiculo ->
+        AlertDialog(
+            onDismissRequest = viewModel::cancelarExclusao,
+            title = { Text("Confirmar Exclusão") },
+            text = { Text("Deseja realmente excluir o veículo \"${veiculo.placa}\"?") },
+            confirmButton = {
+                TextButton(onClick = viewModel::confirmarExclusao) {
+                    Text("Excluir", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::cancelarExclusao) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
 }
 
 @Composable
@@ -279,22 +298,4 @@ fun VeiculoFormDialog(
             }
         }
     )
-    // AlertDialog de Confirmação de Exclusão
-    state.veiculoParaExcluir?.let { veiculo ->
-        AlertDialog(
-            onDismissRequest = viewModel::cancelarExclusao,
-            title = { Text("Confirmar Exclusão") },
-            text = { Text("Deseja realmente excluir o veículo \"${veiculo.placa}\"?") },
-            confirmButton = {
-                TextButton(onClick = viewModel::confirmarExclusao) {
-                    Text("Excluir", color = MaterialTheme.colorScheme.error)
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = viewModel::cancelarExclusao) {
-                    Text("Cancelar")
-                }
-            }
-        )
-    }
 }
