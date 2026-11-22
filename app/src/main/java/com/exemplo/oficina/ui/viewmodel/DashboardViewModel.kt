@@ -2,6 +2,7 @@ package com.exemplo.oficina.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.exemplo.oficina.data.local.SettingsRepository
 import com.exemplo.oficina.data.local.UserPreferencesRepository
 import com.exemplo.oficina.data.repository.DashboardRepository
 import com.exemplo.oficina.data.repository.NetworkResult
@@ -10,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -23,7 +26,8 @@ data class DashboardUiState(
 
 class DashboardViewModel(
     private val dashboardRepository: DashboardRepository,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val userPreferencesRepository: UserPreferencesRepository,
+    private val settingsRepository: SettingsRepository? = null
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DashboardUiState())
@@ -36,8 +40,14 @@ class DashboardViewModel(
 
     private fun observeUserData() {
         viewModelScope.launch {
-            userPreferencesRepository.loggedUserNameFlow.collectLatest { name ->
-                _uiState.update { it.copy(usuarioNome = name) }
+            val customNameFlow = settingsRepository?.displayNameOrNullFlow ?: flowOf(null)
+            combine(
+                userPreferencesRepository.loggedUserNameFlow,
+                customNameFlow
+            ) { loggedName, customName ->
+                if (!customName.isNullOrBlank()) customName else loggedName
+            }.collectLatest { finalName ->
+                _uiState.update { it.copy(usuarioNome = finalName) }
             }
         }
         viewModelScope.launch {

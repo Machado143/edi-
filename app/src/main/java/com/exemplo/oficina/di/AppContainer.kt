@@ -156,7 +156,7 @@ class ViewModelFactory(
                 LoginViewModel(container.authRepository, container.userPreferencesRepository) as T
             }
             modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
-                DashboardViewModel(container.dashboardRepository, container.userPreferencesRepository) as T
+                DashboardViewModel(container.dashboardRepository, container.userPreferencesRepository, container.settingsRepository) as T
             }
             modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
                 SettingsViewModel(container.settingsRepository, container.userPreferencesRepository, { container.apiService }, container::recreateApiService) as T

@@ -37,6 +37,10 @@ class SettingsRepository(private val context: Context) {
         prefs[Keys.DISPLAY_NAME] ?: "Administrador Oficina"
     }
 
+    val displayNameOrNullFlow: Flow<String?> = context.settingsDataStore.data.map { prefs ->
+        prefs[Keys.DISPLAY_NAME]
+    }
+
     val notificationsEnabledFlow: Flow<Boolean> = context.settingsDataStore.data.map { prefs ->
         prefs[Keys.NOTIFICATIONS_ENABLED] ?: true
     }
