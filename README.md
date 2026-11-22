@@ -184,7 +184,7 @@ curl.exe -i -X GET "http://localhost/oficina_api/clientes.php"
 - `200` — operação concluída.
 - `201` — recurso criado.
 - `400` — parâmetro obrigatório ausente ou método inválido.
-- `401` — token ausente, inválido ou expirado.
+- `401` — token ausente ou inválido (invalidado apenas em novo login do mesmo usuário).
 - `404` — recurso não encontrado.
 - `409` — conflito ou exclusão bloqueada por relacionamento.
 - `422` — validação de dados.
