@@ -30,6 +30,8 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -37,6 +39,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,6 +61,23 @@ fun VeiculoScreen(
     onNavigateBack: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(state.errorMessage) {
+        if (!state.isFormOpen) {
+            state.errorMessage?.let { msg ->
+                snackbarHostState.showSnackbar(msg)
+                viewModel.clearMessages()
+            }
+        }
+    }
+
+    LaunchedEffect(state.successMessage) {
+        state.successMessage?.let { msg ->
+            snackbarHostState.showSnackbar(msg)
+            viewModel.clearMessages()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -77,7 +97,8 @@ fun VeiculoScreen(
             FloatingActionButton(onClick = { viewModel.openForm() }) {
                 Icon(Icons.Default.Add, contentDescription = "Novo Veículo")
             }
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -113,7 +134,7 @@ fun VeiculoScreen(
                             veiculo = veiculo,
                             clienteNome = clienteNome,
                             onEdit = { viewModel.openForm(veiculo) },
-                            onDelete = { veiculo.id?.let { id -> viewModel.deleteVeiculo(id) } }
+                            onDelete = { viewModel.solicitarExclusao(veiculo) }
                         )
                     }
                 }
@@ -258,4 +279,22 @@ fun VeiculoFormDialog(
             }
         }
     )
+    // AlertDialog de Confirmação de Exclusão
+    state.veiculoParaExcluir?.let { veiculo ->
+        AlertDialog(
+            onDismissRequest = viewModel::cancelarExclusao,
+            title = { Text("Confirmar Exclusão") },
+            text = { Text("Deseja realmente excluir o veículo \"${veiculo.placa}\"?") },
+            confirmButton = {
+                TextButton(onClick = viewModel::confirmarExclusao) {
+                    Text("Excluir", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::cancelarExclusao) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
 }

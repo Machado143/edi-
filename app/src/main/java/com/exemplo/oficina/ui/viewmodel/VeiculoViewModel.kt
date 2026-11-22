@@ -21,8 +21,10 @@ data class VeiculoUiState(
     val isLoading: Boolean = false,
     val isSaving: Boolean = false,
     val errorMessage: String? = null,
+    val successMessage: String? = null,
     val isFormOpen: Boolean = false,
     val selectedVeiculo: Veiculo? = null,
+    val veiculoParaExcluir: Veiculo? = null,
 
     // Form inputs
     val clienteIdInput: Int? = null,
@@ -126,12 +128,34 @@ class VeiculoViewModel(
         }
     }
 
-    fun deleteVeiculo(id: Int) {
+    fun clearMessages() {
+        _uiState.update { it.copy(errorMessage = null, successMessage = null) }
+    }
+
+    fun solicitarExclusao(veiculo: Veiculo) {
+        _uiState.update { it.copy(veiculoParaExcluir = veiculo) }
+    }
+
+    fun cancelarExclusao() {
+        _uiState.update { it.copy(veiculoParaExcluir = null) }
+    }
+
+    fun confirmarExclusao() {
+        val veiculo = _uiState.value.veiculoParaExcluir ?: return
+        val id = veiculo.id ?: return
+
         viewModelScope.launch {
-            when (val result = veiculoRepository.deleteVeiculo(id)) {
-                is NetworkResult.Success -> loadData()
-                is NetworkResult.Error -> _uiState.update { it.copy(errorMessage = result.message) }
-                else -> Unit
+            _uiState.update { it.copy(isLoading = true, veiculoParaExcluir = null) }
+            val result = veiculoRepository.deleteVeiculo(id)
+            when (result) {
+                is NetworkResult.Success -> {
+                    _uiState.update { it.copy(successMessage = "Veículo excluído com sucesso!") }
+                    loadData()
+                }
+                is NetworkResult.Error -> {
+                    _uiState.update { it.copy(isLoading = false, errorMessage = result.message) }
+                }
+                is NetworkResult.Loading -> {}
             }
         }
     }
