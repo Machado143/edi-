@@ -1,0 +1,368 @@
+{
+  "app/build.gradle.kts": {
+    "mtime": 1795351077.8874192,
+    "seen": 1795352424.2742882,
+    "ast_hash": "7a585b43685ebec9e55c16611485d328",
+    "semantic_hash": "7a585b43685ebec9e55c16611485d328"
+  },
+  "app/src/androidTest/java/com/example/trabalhoedivaldo/ExampleInstrumentedTest.kt": {
+    "mtime": 1795351077.9364667,
+    "seen": 1795352424.2742934,
+    "ast_hash": "39b6d5932c28c3574834cf9a5771a5e6",
+    "semantic_hash": "39b6d5932c28c3574834cf9a5771a5e6"
+  },
+  "app/src/main/java/com/example/trabalhoedivaldo/MainActivity.kt": {
+    "mtime": 1795351077.9529834,
+    "seen": 1795352424.274296,
+    "ast_hash": "7095727c801119ddec6fcdd9d0e53b78",
+    "semantic_hash": "7095727c801119ddec6fcdd9d0e53b78"
+  },
+  "app/src/main/java/com/example/trabalhoedivaldo/ui/theme/Color.kt": {
+    "mtime": 1795351077.9611092,
+    "seen": 1795352424.2742977,
+    "ast_hash": "e88e5235b1008f0bc57c20e067c9314e",
+    "semantic_hash": "e88e5235b1008f0bc57c20e067c9314e"
+  },
+  "app/src/main/java/com/example/trabalhoedivaldo/ui/theme/Theme.kt": {
+    "mtime": 1795351077.9766262,
+    "seen": 1795352424.274299,
+    "ast_hash": "3f73df7c458efdd286aabf807a997854",
+    "semantic_hash": "3f73df7c458efdd286aabf807a997854"
+  },
+  "app/src/main/java/com/example/trabalhoedivaldo/ui/theme/Type.kt": {
+    "mtime": 1795351077.9691103,
+    "seen": 1795352424.2743003,
+    "ast_hash": "470252111fae19867cbc938e23dc661b",
+    "semantic_hash": "470252111fae19867cbc938e23dc661b"
+  },
+  "app/src/main/java/com/exemplo/oficina/MainActivity.kt": {
+    "mtime": 1795351077.9856253,
+    "seen": 1795352424.2743015,
+    "ast_hash": "c9396175156c63fa4cb2336963880c34",
+    "semantic_hash": "c9396175156c63fa4cb2336963880c34"
+  },
+  "app/src/main/java/com/exemplo/oficina/OficinaApplication.kt": {
+    "mtime": 1795351077.9931443,
+    "seen": 1795352424.2743025,
+    "ast_hash": "13fe101fe438303d8476f68ebcf457de",
+    "semantic_hash": "13fe101fe438303d8476f68ebcf457de"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/local/SessionEventBus.kt": {
+    "mtime": 1795351078.243764,
+    "seen": 1795352424.2743034,
+    "ast_hash": "feb0fd50a32b9dbe183c3f6aacc560d9",
+    "semantic_hash": "feb0fd50a32b9dbe183c3f6aacc560d9"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/local/SettingsRepository.kt": {
+    "mtime": 1795351078.259282,
+    "seen": 1795352424.2743046,
+    "ast_hash": "726d7a8211b04c110b0bf116db86c498",
+    "semantic_hash": "726d7a8211b04c110b0bf116db86c498"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/local/UserPreferencesRepository.kt": {
+    "mtime": 1795351078.2517636,
+    "seen": 1795352424.2743053,
+    "ast_hash": "28e5159a541beba2818a44cd3de4acd1",
+    "semantic_hash": "28e5159a541beba2818a44cd3de4acd1"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/remote/ApiService.kt": {
+    "mtime": 1795351078.228248,
+    "seen": 1795352424.2743065,
+    "ast_hash": "c814bdaa4ef718e5b5db6d361a3a1977",
+    "semantic_hash": "c814bdaa4ef718e5b5db6d361a3a1977"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/remote/Dtos.kt": {
+    "mtime": 1795351078.2207298,
+    "seen": 1795352424.2743075,
+    "ast_hash": "9c2850a21da837179a6ab86a95bb44a2",
+    "semantic_hash": "9c2850a21da837179a6ab86a95bb44a2"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/remote/ErrorJsonParser.kt": {
+    "mtime": 1795351078.2362478,
+    "seen": 1795352424.2743087,
+    "ast_hash": "fc883f84a3f68f33ff43fb3ddeafe1a5",
+    "semantic_hash": "fc883f84a3f68f33ff43fb3ddeafe1a5"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/AuthRepository.kt": {
+    "mtime": 1795351078.1754243,
+    "seen": 1795352424.2743094,
+    "ast_hash": "6bb92e3ea68db9d882d287d1a622685c",
+    "semantic_hash": "6bb92e3ea68db9d882d287d1a622685c"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/ClienteRepository.kt": {
+    "mtime": 1795351078.1824236,
+    "seen": 1795352424.2743104,
+    "ast_hash": "964df53ab6c04cb987fa398935b77e86",
+    "semantic_hash": "964df53ab6c04cb987fa398935b77e86"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/DashboardRepository.kt": {
+    "mtime": 1795351078.1899385,
+    "seen": 1795352424.2743115,
+    "ast_hash": "c881fc5c3869fd2c150265838b5bb864",
+    "semantic_hash": "c881fc5c3869fd2c150265838b5bb864"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/NetworkResult.kt": {
+    "mtime": 1795351078.2049417,
+    "seen": 1795352424.2743125,
+    "ast_hash": "616e4654ef8421c168a2c262608968d3",
+    "semantic_hash": "616e4654ef8421c168a2c262608968d3"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/OrdemServicoRepository.kt": {
+    "mtime": 1795351078.212731,
+    "seen": 1795352424.2743137,
+    "ast_hash": "2c25231d9bcb4517736f731a89e8207b",
+    "semantic_hash": "2c25231d9bcb4517736f731a89e8207b"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/ServicoRepository.kt": {
+    "mtime": 1795351078.1679082,
+    "seen": 1795352424.274315,
+    "ast_hash": "90627b4ef6926aed0a44406dcf252c84",
+    "semantic_hash": "90627b4ef6926aed0a44406dcf252c84"
+  },
+  "app/src/main/java/com/exemplo/oficina/data/repository/VeiculoRepository.kt": {
+    "mtime": 1795351078.1979454,
+    "seen": 1795352424.274316,
+    "ast_hash": "13c2e7c7a64849e8fc7aa2b39e67fd33",
+    "semantic_hash": "13c2e7c7a64849e8fc7aa2b39e67fd33"
+  },
+  "app/src/main/java/com/exemplo/oficina/di/AppContainer.kt": {
+    "mtime": 1795351078.2662814,
+    "seen": 1795352424.2743173,
+    "ast_hash": "37aae1a443b4c2356cf18bfa9d9d20d1",
+    "semantic_hash": "37aae1a443b4c2356cf18bfa9d9d20d1"
+  },
+  "app/src/main/java/com/exemplo/oficina/domain/model/DomainModels.kt": {
+    "mtime": 1795351078.2737968,
+    "seen": 1795352424.2743187,
+    "ast_hash": "89d00a4bfd9a9241b08787a1bfaf00a3",
+    "semantic_hash": "89d00a4bfd9a9241b08787a1bfaf00a3"
+  },
+  "app/src/main/java/com/exemplo/oficina/domain/model/OsCalculations.kt": {
+    "mtime": 1795351078.2808018,
+    "seen": 1795352424.2743196,
+    "ast_hash": "7059559a5405ba67a7d91c7ecf81746e",
+    "semantic_hash": "7059559a5405ba67a7d91c7ecf81746e"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/components/CommonUiComponents.kt": {
+    "mtime": 1795351078.0011435,
+    "seen": 1795352424.2743204,
+    "ast_hash": "6dfa856a9eea50cf9ccb7e9c61b7f424",
+    "semantic_hash": "6dfa856a9eea50cf9ccb7e9c61b7f424"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/navigation/AppNavigation.kt": {
+    "mtime": 1795351078.025681,
+    "seen": 1795352424.2743213,
+    "ast_hash": "d05aa4d789ba87467318937d291cb76a",
+    "semantic_hash": "d05aa4d789ba87467318937d291cb76a"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/navigation/NavRoutes.kt": {
+    "mtime": 1795351078.0346792,
+    "seen": 1795352424.2743225,
+    "ast_hash": "b161bb4e0364a4b9fe2fedb22593d0c7",
+    "semantic_hash": "b161bb4e0364a4b9fe2fedb22593d0c7"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/ClienteScreen.kt": {
+    "mtime": 1795351078.098335,
+    "seen": 1795352424.2743235,
+    "ast_hash": "85dde8d9a257acc4e72a17cca750d250",
+    "semantic_hash": "85dde8d9a257acc4e72a17cca750d250"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/HomeScreen.kt": {
+    "mtime": 1795351078.1368735,
+    "seen": 1795352424.2743244,
+    "ast_hash": "66abc2937b67e95305606542c764e8c9",
+    "semantic_hash": "66abc2937b67e95305606542c764e8c9"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/LoginScreen.kt": {
+    "mtime": 1795351078.1288755,
+    "seen": 1795352424.2743251,
+    "ast_hash": "cae5ac943b51e16d24499a77cd3f0dc1",
+    "semantic_hash": "cae5ac943b51e16d24499a77cd3f0dc1"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/OrdemServicoDetailScreen.kt": {
+    "mtime": 1795351078.1213596,
+    "seen": 1795352424.2743263,
+    "ast_hash": "cd3e253b696c74ab02f9b49324cf8ca2",
+    "semantic_hash": "cd3e253b696c74ab02f9b49324cf8ca2"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/OrdemServicoFormScreen.kt": {
+    "mtime": 1795351078.152391,
+    "seen": 1795352424.274327,
+    "ast_hash": "97c9475881eec3eb3eeab52ef92196e9",
+    "semantic_hash": "97c9475881eec3eb3eeab52ef92196e9"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/OrdemServicoListScreen.kt": {
+    "mtime": 1795351078.1599095,
+    "seen": 1795352424.274328,
+    "ast_hash": "19e84ef39f5c46c03e6f9ed9e068962f",
+    "semantic_hash": "19e84ef39f5c46c03e6f9ed9e068962f"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/ServicoScreen.kt": {
+    "mtime": 1795351078.114361,
+    "seen": 1795352424.2743292,
+    "ast_hash": "7cc32e69fa4dfaf799a243bdee900817",
+    "semantic_hash": "7cc32e69fa4dfaf799a243bdee900817"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/SettingsScreen.kt": {
+    "mtime": 1795351078.1058419,
+    "seen": 1795352424.2743301,
+    "ast_hash": "d08640d8a32c55f2de90b2d8a8663e6a",
+    "semantic_hash": "d08640d8a32c55f2de90b2d8a8663e6a"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/screens/VeiculoScreen.kt": {
+    "mtime": 1795351078.1443918,
+    "seen": 1795352424.2743309,
+    "ast_hash": "683f5ced162558cee21c43379cc2d988",
+    "semantic_hash": "683f5ced162558cee21c43379cc2d988"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/util/FormValidation.kt": {
+    "mtime": 1795351078.0091603,
+    "seen": 1795352424.2743318,
+    "ast_hash": "9a7f6770d46d6e92d972cb40e1a2a1a9",
+    "semantic_hash": "9a7f6770d46d6e92d972cb40e1a2a1a9"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/util/InputMasks.kt": {
+    "mtime": 1795351078.0181656,
+    "seen": 1795352424.2743328,
+    "ast_hash": "4afed0182a681ff579c15911450e9392",
+    "semantic_hash": "4afed0182a681ff579c15911450e9392"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/ClienteViewModel.kt": {
+    "mtime": 1795351078.0607133,
+    "seen": 1795352424.2743337,
+    "ast_hash": "ce7ad6af2a6785337399031ea8c89569",
+    "semantic_hash": "ce7ad6af2a6785337399031ea8c89569"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/DashboardViewModel.kt": {
+    "mtime": 1795351078.0762203,
+    "seen": 1795352424.2743344,
+    "ast_hash": "da39062f16c225c8236a93877b0a2336",
+    "semantic_hash": "da39062f16c225c8236a93877b0a2336"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/LoginViewModel.kt": {
+    "mtime": 1795351078.084221,
+    "seen": 1795352424.2743354,
+    "ast_hash": "f9afc5108414458362eea0f1b35a969a",
+    "semantic_hash": "f9afc5108414458362eea0f1b35a969a"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/OrdemServicoViewModel.kt": {
+    "mtime": 1795351078.0521927,
+    "seen": 1795352424.2743363,
+    "ast_hash": "2274be3952745db63fb9efc7c38836eb",
+    "semantic_hash": "2274be3952745db63fb9efc7c38836eb"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/ServicoViewModel.kt": {
+    "mtime": 1795351078.0687115,
+    "seen": 1795352424.2743373,
+    "ast_hash": "0d946e0d054ce770878475115414b49f",
+    "semantic_hash": "0d946e0d054ce770878475115414b49f"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/SettingsViewModel.kt": {
+    "mtime": 1795351078.0913358,
+    "seen": 1795352424.2743387,
+    "ast_hash": "f20a83ca38e614d1147ac3342ccc2f3e",
+    "semantic_hash": "f20a83ca38e614d1147ac3342ccc2f3e"
+  },
+  "app/src/main/java/com/exemplo/oficina/ui/viewmodel/VeiculoViewModel.kt": {
+    "mtime": 1795351078.044189,
+    "seen": 1795352424.2743397,
+    "ast_hash": "b3e24cdfcd3a50dcdec92bec634f019b",
+    "semantic_hash": "b3e24cdfcd3a50dcdec92bec634f019b"
+  },
+  "app/src/test/java/com/exemplo/oficina/data/remote/ErrorJsonParserTest.kt": {
+    "mtime": 1795351077.912955,
+    "seen": 1795352424.2743406,
+    "ast_hash": "4937b7431d540cdc3d3c04e34d604e16",
+    "semantic_hash": "4937b7431d540cdc3d3c04e34d604e16"
+  },
+  "app/src/test/java/com/exemplo/oficina/data/remote/SafeDoubleAdapterTest.kt": {
+    "mtime": 1795351077.9209526,
+    "seen": 1795352424.2743413,
+    "ast_hash": "2f09036e2197f5532ed7b04d0d32b272",
+    "semantic_hash": "2f09036e2197f5532ed7b04d0d32b272"
+  },
+  "app/src/test/java/com/exemplo/oficina/domain/OsCalculationsTest.kt": {
+    "mtime": 1795351077.9294677,
+    "seen": 1795352424.2743423,
+    "ast_hash": "54d6308dbb8fe8e1e6c0f31247b65dd6",
+    "semantic_hash": "54d6308dbb8fe8e1e6c0f31247b65dd6"
+  },
+  "app/src/test/java/com/exemplo/oficina/ui/util/FormValidationTest.kt": {
+    "mtime": 1795351077.9049337,
+    "seen": 1795352424.2743435,
+    "ast_hash": "195e8d458ed8440445c030b8ad0f4749",
+    "semantic_hash": "195e8d458ed8440445c030b8ad0f4749"
+  },
+  "build.gradle.kts": {
+    "mtime": 1795351077.7168844,
+    "seen": 1795352424.2743442,
+    "ast_hash": "f49e4fcefdb4de67e72283440b2f3b75",
+    "semantic_hash": "f49e4fcefdb4de67e72283440b2f3b75"
+  },
+  "gradlew": {
+    "mtime": 1795351077.7294068,
+    "seen": 1795352424.2743452,
+    "ast_hash": "266606e78242737ef3da02a80ea0564d",
+    "semantic_hash": "266606e78242737ef3da02a80ea0564d"
+  },
+  "oficina_api/clientes.php": {
+    "mtime": 1795351078.4559197,
+    "seen": 1795352424.2743459,
+    "ast_hash": "47d85f528cac5fc5ca3bd3316ad62011",
+    "semantic_hash": "47d85f528cac5fc5ca3bd3316ad62011"
+  },
+  "oficina_api/config.php": {
+    "mtime": 1795351078.4939673,
+    "seen": 1795352424.274347,
+    "ast_hash": "81031d663c9adf3d06fb4dcbae8a731c",
+    "semantic_hash": "81031d663c9adf3d06fb4dcbae8a731c"
+  },
+  "oficina_api/helpers.php": {
+    "mtime": 1795351078.486451,
+    "seen": 1795352424.274348,
+    "ast_hash": "bf446447424f4234fe69cabb065836df",
+    "semantic_hash": "bf446447424f4234fe69cabb065836df"
+  },
+  "oficina_api/login.php": {
+    "mtime": 1795351078.508482,
+    "seen": 1795352424.2743487,
+    "ast_hash": "69beeb10daed50207fd9b8b007bedfe8",
+    "semantic_hash": "69beeb10daed50207fd9b8b007bedfe8"
+  },
+  "oficina_api/ordens.php": {
+    "mtime": 1795351078.4784558,
+    "seen": 1795352424.27435,
+    "ast_hash": "530cd6052f478a4a60f9f3fd10c679c0",
+    "semantic_hash": "530cd6052f478a4a60f9f3fd10c679c0"
+  },
+  "oficina_api/resumo.php": {
+    "mtime": 1795351078.5009685,
+    "seen": 1795352424.2743506,
+    "ast_hash": "a2661242e1a102b030b60dae624898f5",
+    "semantic_hash": "a2661242e1a102b030b60dae624898f5"
+  },
+  "oficina_api/servicos.php": {
+    "mtime": 1795351078.4709346,
+    "seen": 1795352424.2743518,
+    "ast_hash": "4896607ee873aef1a65072665e89ce63",
+    "semantic_hash": "4896607ee873aef1a65072665e89ce63"
+  },
+  "oficina_api/veiculos.php": {
+    "mtime": 1795351078.4629343,
+    "seen": 1795352424.2743528,
+    "ast_hash": "79d96247ecd1b6300304d5202e435b32",
+    "semantic_hash": "79d96247ecd1b6300304d5202e435b32"
+  },
+  "settings.gradle.kts": {
+    "mtime": 1795351077.7234025,
+    "seen": 1795352424.274354,
+    "ast_hash": "d73923479772679e8ec0f9d924d2b72f",
+    "semantic_hash": "d73923479772679e8ec0f9d924d2b72f"
+  },
+  "tests/api-tests.ps1": {
+    "mtime": 1795351078.4464085,
+    "seen": 1795352424.2743547,
+    "ast_hash": "85db88d9c6e6f1cbcdd924f7bc51e72e",
+    "semantic_hash": "85db88d9c6e6f1cbcdd924f7bc51e72e"
+  }
+}

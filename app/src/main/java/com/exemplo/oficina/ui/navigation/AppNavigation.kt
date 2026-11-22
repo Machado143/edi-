@@ -61,10 +61,19 @@ fun AppNavigation(
     val savedToken by appContainer.userPreferencesRepository.userTokenFlow.collectAsState(initial = null)
     val rememberMe by appContainer.userPreferencesRepository.rememberMeFlow.collectAsState(initial = true)
 
-    val startRoute = if (!savedToken.isNullOrBlank() && rememberMe) {
-        Screen.Home.route
-    } else {
-        Screen.Login.route
+    val startRoute = Screen.Login.route
+
+    LaunchedEffect(savedToken, rememberMe) {
+        if (!savedToken.isNullOrBlank() && rememberMe && navController.currentDestination?.route == Screen.Login.route) {
+            navController.navigate(Screen.Home.route) {
+                popUpTo(Screen.Login.route) { inclusive = true }
+            }
+        } else if (savedToken.isNullOrBlank() && navController.currentDestination?.route != Screen.Login.route) {
+            loginViewModel.resetState()
+            navController.navigate(Screen.Login.route) {
+                popUpTo(0) { inclusive = true }
+            }
+        }
     }
 
     NavHost(
@@ -75,6 +84,7 @@ fun AppNavigation(
             LoginScreen(
                 viewModel = loginViewModel,
                 onLoginSuccess = {
+                    loginViewModel.resetState()
                     navController.navigate(Screen.Home.route) {
                         popUpTo(Screen.Login.route) { inclusive = true }
                     }
@@ -97,6 +107,7 @@ fun AppNavigation(
                 onLogout = {
                     scope.launch {
                         appContainer.userPreferencesRepository.clearSession()
+                        loginViewModel.resetState()
                         navController.navigate(Screen.Login.route) {
                             popUpTo(0) { inclusive = true }
                         }
