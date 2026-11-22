@@ -132,8 +132,8 @@ fun SettingsScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
-                        Text("Notificações Push", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
-                        Text("Receber alertas de status de OS", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("Notificações locais", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
+                        Text("Avisar quando o status de uma OS for alterado neste aparelho", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     Switch(
                         checked = state.notificationsEnabled,

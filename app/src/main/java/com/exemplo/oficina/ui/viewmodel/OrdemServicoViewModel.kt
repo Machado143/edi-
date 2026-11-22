@@ -16,6 +16,7 @@ import com.exemplo.oficina.ui.util.FormValidation
 import com.exemplo.oficina.domain.model.Servico
 import com.exemplo.oficina.domain.model.StatusOS
 import com.exemplo.oficina.domain.model.Veiculo
+import com.exemplo.oficina.ui.util.NotificationHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -69,7 +70,8 @@ class OrdemServicoViewModel(
     private val veiculoRepository: VeiculoRepository,
     private val clienteRepository: ClienteRepository,
     private val servicoRepository: ServicoRepository,
-    private val settingsRepository: SettingsRepository? = null
+    private val settingsRepository: SettingsRepository? = null,
+    private val notificationHelper: NotificationHelper? = null
 ) : ViewModel() {
 
     private val _listState = MutableStateFlow(OrdemServicoListUiState())
@@ -79,6 +81,7 @@ class OrdemServicoViewModel(
     val formState: StateFlow<OrdemServicoFormUiState> = _formState.asStateFlow()
 
     private var searchJob: Job? = null
+    private var originalStatus: String? = null
 
     init {
         observeSettings()
@@ -117,7 +120,10 @@ class OrdemServicoViewModel(
     fun alterarStatus(id: Int, status: String) {
         viewModelScope.launch {
             when (val result = ordemServicoRepository.updateStatus(id, status)) {
-                is NetworkResult.Success -> loadOrdens()
+                is NetworkResult.Success -> {
+                    loadOrdens()
+                    notificationHelper?.notificarMudancaStatus(id, status)
+                }
                 is NetworkResult.Error -> _listState.update { it.copy(errorMessage = result.message) }
                 is NetworkResult.Loading -> {}
             }
@@ -200,6 +206,7 @@ class OrdemServicoViewModel(
                 .firstOrNull()?.message
 
             if (osId == null || osId == 0) {
+                originalStatus = null
                 val firstVeiculo = veiculos.firstOrNull()
                 val firstServico = servicos.firstOrNull()
                 _formState.update {
@@ -218,6 +225,7 @@ class OrdemServicoViewModel(
                 when (val result = ordemServicoRepository.getOrdemById(osId)) {
                     is NetworkResult.Success -> {
                         val d = result.data
+                        originalStatus = d.os.status
                         _formState.update {
                             it.copy(
                                 id = d.os.id,
@@ -350,6 +358,9 @@ class OrdemServicoViewModel(
             observacoes = s.observacoesInput.trim()
         )
 
+        val osIdEditada = s.id
+        val statusAnterior = originalStatus
+
         viewModelScope.launch {
             _formState.update { it.copy(isLoading = true, isSaving = true) }
             val result = if (s.id == null) {
@@ -361,6 +372,10 @@ class OrdemServicoViewModel(
                 is NetworkResult.Success -> {
                     _formState.update { it.copy(isLoading = false, isSaving = false, isSavedSuccess = true) }
                     loadOrdens()
+                    if (osIdEditada != null && s.status != statusAnterior) {
+                        originalStatus = s.status
+                        notificationHelper?.notificarMudancaStatus(osIdEditada, s.status)
+                    }
                 }
                 is NetworkResult.Error -> {
                     _formState.update { it.copy(isLoading = false, isSaving = false, errorMessage = result.message) }

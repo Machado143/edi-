@@ -19,6 +19,7 @@ import com.exemplo.oficina.ui.viewmodel.OrdemServicoViewModel
 import com.exemplo.oficina.ui.viewmodel.ServicoViewModel
 import com.exemplo.oficina.ui.viewmodel.SettingsViewModel
 import com.exemplo.oficina.ui.viewmodel.VeiculoViewModel
+import com.exemplo.oficina.ui.util.NotificationHelper
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -40,6 +41,7 @@ interface AppContainer {
     val ordemServicoRepository: OrdemServicoRepository
     val authRepository: AuthRepository
     val dashboardRepository: DashboardRepository
+    val notificationHelper: NotificationHelper
     val apiService: ApiService
     val sessionExpiredEvents: SharedFlow<String>
     fun recreateApiService(baseUrl: String)
@@ -53,6 +55,10 @@ class DefaultAppContainer(private val context: Context) : AppContainer {
 
     override val settingsRepository: SettingsRepository by lazy {
         SettingsRepository(context)
+    }
+
+    override val notificationHelper: NotificationHelper by lazy {
+        NotificationHelper(context, settingsRepository)
     }
 
     override val sessionExpiredEvents: SharedFlow<String> = SessionEventBus.sessionExpired
@@ -176,7 +182,8 @@ class ViewModelFactory(
                     container.veiculoRepository,
                     container.clienteRepository,
                     container.servicoRepository,
-                    container.settingsRepository
+                    container.settingsRepository,
+                    container.notificationHelper
                 ) as T
             }
             else -> throw IllegalArgumentException("ViewModel desconhecido: ${modelClass.name}")
