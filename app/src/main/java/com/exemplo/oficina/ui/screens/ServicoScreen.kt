@@ -31,9 +31,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -51,6 +55,23 @@ fun ServicoScreen(
     onNavigateBack: () -> Unit
 ) {
     val state by viewModel.uiState.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    LaunchedEffect(state.errorMessage) {
+        if (!state.isFormOpen) {
+            state.errorMessage?.let { msg ->
+                snackbarHostState.showSnackbar(msg)
+                viewModel.clearMessages()
+            }
+        }
+    }
+
+    LaunchedEffect(state.successMessage) {
+        state.successMessage?.let { msg ->
+            snackbarHostState.showSnackbar(msg)
+            viewModel.clearMessages()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -70,7 +91,8 @@ fun ServicoScreen(
             FloatingActionButton(onClick = { viewModel.openForm() }) {
                 Icon(Icons.Default.Add, contentDescription = "Novo Serviço")
             }
-        }
+        },
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -104,7 +126,7 @@ fun ServicoScreen(
                         ServicoCardItem(
                             servico = servico,
                             onEdit = { viewModel.openForm(servico) },
-                            onDelete = { servico.id?.let { id -> viewModel.deleteServico(id) } }
+                            onDelete = { viewModel.solicitarExclusao(servico) }
                         )
                     }
                 }
@@ -114,6 +136,25 @@ fun ServicoScreen(
 
     if (state.isFormOpen) {
         ServicoFormDialog(state = state, viewModel = viewModel)
+    }
+
+    // AlertDialog de Confirmação de Exclusão
+    state.servicoParaExcluir?.let { servico ->
+        AlertDialog(
+            onDismissRequest = viewModel::cancelarExclusao,
+            title = { Text("Confirmar Exclusão") },
+            text = { Text("Deseja realmente excluir o serviço \"${servico.nome}\"?") },
+            confirmButton = {
+                TextButton(onClick = viewModel::confirmarExclusao) {
+                    Text("Excluir", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = viewModel::cancelarExclusao) {
+                    Text("Cancelar")
+                }
+            }
+        )
     }
 }
 

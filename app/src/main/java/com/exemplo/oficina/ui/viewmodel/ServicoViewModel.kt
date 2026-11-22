@@ -17,8 +17,10 @@ data class ServicoUiState(
     val isLoading: Boolean = false,
     val isSaving: Boolean = false,
     val errorMessage: String? = null,
+    val successMessage: String? = null,
     val isFormOpen: Boolean = false,
     val selectedServico: Servico? = null,
+    val servicoParaExcluir: Servico? = null,
 
     // Form inputs
     val nomeInput: String = "",
@@ -106,12 +108,34 @@ class ServicoViewModel(
         }
     }
 
-    fun deleteServico(id: Int) {
+    fun clearMessages() {
+        _uiState.update { it.copy(errorMessage = null, successMessage = null) }
+    }
+
+    fun solicitarExclusao(servico: Servico) {
+        _uiState.update { it.copy(servicoParaExcluir = servico) }
+    }
+
+    fun cancelarExclusao() {
+        _uiState.update { it.copy(servicoParaExcluir = null) }
+    }
+
+    fun confirmarExclusao() {
+        val servico = _uiState.value.servicoParaExcluir ?: return
+        val id = servico.id ?: return
+
         viewModelScope.launch {
-            when (val result = repository.deleteServico(id)) {
-                is NetworkResult.Success -> loadServicos()
-                is NetworkResult.Error -> _uiState.update { it.copy(errorMessage = result.message) }
-                else -> Unit
+            _uiState.update { it.copy(isLoading = true, servicoParaExcluir = null) }
+            val result = repository.deleteServico(id)
+            when (result) {
+                is NetworkResult.Success -> {
+                    _uiState.update { it.copy(successMessage = "Serviço excluído com sucesso!") }
+                    loadServicos()
+                }
+                is NetworkResult.Error -> {
+                    _uiState.update { it.copy(isLoading = false, errorMessage = result.message) }
+                }
+                is NetworkResult.Loading -> {}
             }
         }
     }
