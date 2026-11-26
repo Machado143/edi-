@@ -50,6 +50,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.IconBadge
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import com.exemplo.oficina.domain.model.Veiculo
 import com.exemplo.oficina.ui.viewmodel.VeiculoUiState
 import com.exemplo.oficina.ui.viewmodel.VeiculoViewModel
@@ -88,9 +92,7 @@ fun VeiculoScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         },
         floatingActionButton = {
@@ -175,7 +177,9 @@ fun VeiculoCardItem(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             modifier = Modifier
@@ -183,12 +187,8 @@ fun VeiculoCardItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Default.DirectionsCar,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(end = 12.dp)
-            )
+            IconBadge(icon = Icons.Default.DirectionsCar, tint = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.size(12.dp))
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = "${veiculo.modelo} (${veiculo.marca})", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)

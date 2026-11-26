@@ -56,6 +56,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.exemplo.oficina.ui.components.IconBadge
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appTopBarColors
+import com.exemplo.oficina.ui.components.topBarContentColor
+import com.exemplo.oficina.ui.theme.StatusAbertaColor
+import com.exemplo.oficina.ui.theme.StatusAndamentoColor
+import com.exemplo.oficina.ui.theme.StatusCanceladaColor
+import com.exemplo.oficina.ui.theme.StatusFinalizadaColor
 import com.exemplo.oficina.ui.viewmodel.DashboardViewModel
 import java.util.Locale
 
@@ -84,31 +93,28 @@ fun HomeScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Oficina Mecânica (${state.usuarioCargo})",
+                            text = "Oficina Mecânica · ${state.usuarioCargo}",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                            color = topBarContentColor().copy(alpha = 0.8f)
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                ),
+                colors = appTopBarColors(),
                 actions = {
                     IconButton(onClick = viewModel::loadDashboard) {
                         Icon(Icons.Default.Refresh, contentDescription = "Atualizar")
                     }
                     IconButton(onClick = onNavigateToSettings) {
-                        Icon(Icons.Default.Settings, contentDescription = "Configurações REST")
+                        Icon(Icons.Default.Settings, contentDescription = "Configurações")
                     }
                     IconButton(onClick = onLogout) {
-                        Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = "Sair", tint = MaterialTheme.colorScheme.error)
+                        Icon(Icons.AutoMirrored.Filled.ExitToApp, contentDescription = "Sair")
                     }
                 }
             )
         },
         bottomBar = {
-            NavigationBar {
+            NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
                 NavigationBarItem(
                     selected = selectedBottomTab == 0,
                     onClick = { selectedBottomTab = 0 },
@@ -150,7 +156,7 @@ fun HomeScreen(
                 .padding(16.dp)
         ) {
             Text(
-                text = "Resumo Geral (GET /resumo)",
+                text = "Resumo geral",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
@@ -166,10 +172,10 @@ fun HomeScreen(
                 ) {
                     CircularProgressIndicator()
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("Carregando estatísticas...")
+                    Text("Carregando estatísticas...", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             } else {
-                // Cards de Resumo Consumindo GET /resumo
+                // Cards de resumo
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -186,7 +192,7 @@ fun HomeScreen(
                             title = "Em Andamento",
                             value = "${state.resumo.osEmAndamento}",
                             icon = Icons.Default.Build,
-                            color = Color(0xFFFF9800),
+                            color = StatusAndamentoColor,
                             modifier = Modifier.weight(1f)
                         )
                     }
@@ -195,7 +201,7 @@ fun HomeScreen(
                             title = "Finalizadas (Mês)",
                             value = "${state.resumo.osFinalizadasMes}",
                             icon = Icons.Default.CheckCircle,
-                            color = Color(0xFF4CAF50),
+                            color = StatusFinalizadaColor,
                             modifier = Modifier.weight(1f)
                         )
                         ResumoCard(
@@ -215,7 +221,7 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Acesso Rápido aos Módulos",
+                    text = "Módulos",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -256,7 +262,7 @@ fun HomeScreen(
                             title = "Serviços",
                             subtitle = "Catálogo de serviços",
                             icon = Icons.Default.Work,
-                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh,
                             onClick = onNavigateToServicos,
                             modifier = Modifier.weight(1f)
                         )
@@ -271,21 +277,22 @@ fun HomeScreen(
 fun OrdemStatusBarChart(resumo: com.exemplo.oficina.domain.model.ResumoDashboard) {
     val finalizadas = maxOf(resumo.osFinalizadas, resumo.osFinalizadasMes)
     val items = listOf(
-        Triple("Abertas", resumo.osAbertas, Color(0xFF1565C0)),
-        Triple("Andamento", resumo.osEmAndamento, Color(0xFFFF9800)),
-        Triple("Finalizadas", finalizadas, Color(0xFF4CAF50)),
-        Triple("Canceladas", resumo.osCanceladas, Color(0xFFE53935))
+        Triple("Abertas", resumo.osAbertas, StatusAbertaColor),
+        Triple("Andamento", resumo.osEmAndamento, StatusAndamentoColor),
+        Triple("Finalizadas", finalizadas, StatusFinalizadaColor),
+        Triple("Canceladas", resumo.osCanceladas, StatusCanceladaColor)
     )
     val maxCount = maxOf(items.maxOf { it.second }, 1)
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
-        shape = RoundedCornerShape(14.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
-                text = "Ordens de Serviço por status",
+                text = "Ordens de serviço por status",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -301,7 +308,7 @@ fun OrdemStatusBarChart(resumo: com.exemplo.oficina.domain.model.ResumoDashboard
                 val chartHeight = size.height - 18.dp.toPx()
 
                 items.forEachIndexed { index, (_, count, color) ->
-                    val barHeight = chartHeight * count.toFloat() / maxCount.toFloat()
+                    val barHeight = maxOf(chartHeight * count.toFloat() / maxCount.toFloat(), 4.dp.toPx())
                     val left = index * (barWidth + gap)
                     val top = size.height - barHeight
 
@@ -309,7 +316,7 @@ fun OrdemStatusBarChart(resumo: com.exemplo.oficina.domain.model.ResumoDashboard
                         color = color,
                         topLeft = Offset(left, top),
                         size = Size(barWidth, barHeight),
-                        cornerRadius = CornerRadius(10.dp.toPx())
+                        cornerRadius = CornerRadius(8.dp.toPx())
                     )
                 }
             }
@@ -321,8 +328,8 @@ fun OrdemStatusBarChart(resumo: com.exemplo.oficina.domain.model.ResumoDashboard
                         modifier = Modifier.weight(1f),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text("$count", fontWeight = FontWeight.Bold, color = color, fontSize = 14.sp)
-                        Text(label, fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Text("$count", fontWeight = FontWeight.Bold, color = color, fontSize = 16.sp)
+                        Text(label, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             }
@@ -340,18 +347,25 @@ fun ResumoCard(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
-        shape = RoundedCornerShape(14.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            Icon(imageVector = icon, contentDescription = null, tint = color, modifier = Modifier.size(28.dp))
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = value, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = color)
+            IconBadge(icon = icon, tint = color)
+            Spacer(modifier = Modifier.height(12.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1
+            )
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = title, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(text = title, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -370,15 +384,15 @@ fun ModuloMenuCard(
             .fillMaxWidth()
             .clickable { onClick() },
         colors = CardDefaults.cardColors(containerColor = color),
-        shape = RoundedCornerShape(16.dp)
+        shape = MaterialTheme.shapes.large
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(32.dp))
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(text = title, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            Text(text = subtitle, fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Icon(icon, contentDescription = null, modifier = Modifier.size(28.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = title, style = MaterialTheme.typography.titleMedium)
+            Text(text = subtitle, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 2.dp))
         }
     }
 }

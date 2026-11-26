@@ -46,6 +46,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.IconBadge
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import com.exemplo.oficina.domain.model.Cliente
 import com.exemplo.oficina.ui.viewmodel.ClienteUiState
 import com.exemplo.oficina.ui.viewmodel.ClienteViewModel
@@ -88,9 +92,7 @@ fun ClienteScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         },
         floatingActionButton = {
@@ -113,6 +115,7 @@ fun ClienteScreen(
                 label = { Text("Buscar cliente por Nome ou CPF/CNPJ") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.large,
                 singleLine = true
             )
 
@@ -202,7 +205,9 @@ fun ClienteCardItem(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             modifier = Modifier
@@ -210,12 +215,8 @@ fun ClienteCardItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Default.Person,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(end = 12.dp)
-            )
+            IconBadge(icon = Icons.Default.Person, tint = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.size(12.dp))
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = cliente.nome, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)

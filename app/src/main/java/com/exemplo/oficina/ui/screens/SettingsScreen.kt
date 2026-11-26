@@ -37,6 +37,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import com.exemplo.oficina.ui.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,9 +59,7 @@ fun SettingsScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         }
     ) { innerPadding ->
@@ -73,7 +74,9 @@ fun SettingsScreen(
             // 1. Tema do Aplicativo (Claro / Escuro / Sistema)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                colors = appCardColors(),
+                border = appCardBorder(),
+                shape = MaterialTheme.shapes.large
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("Tema Visual (Aplicado em Tempo Real)", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
@@ -104,7 +107,9 @@ fun SettingsScreen(
             // 2. Nome de Exibição
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                colors = appCardColors(),
+                border = appCardBorder(),
+                shape = MaterialTheme.shapes.large
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("Perfil do Usuário", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
@@ -122,7 +127,9 @@ fun SettingsScreen(
             // 3. Notificações (Switch)
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                colors = appCardColors(),
+                border = appCardBorder(),
+                shape = MaterialTheme.shapes.large
             ) {
                 Row(
                     modifier = Modifier
@@ -143,7 +150,12 @@ fun SettingsScreen(
             }
 
             // 4. URL do servidor
-            Card(modifier = Modifier.fillMaxWidth(), elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = appCardColors(),
+                border = appCardBorder(),
+                shape = MaterialTheme.shapes.large
+            ) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text("Servidor da API", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)
                     var urlText by remember(state.serverUrl) { mutableStateOf(state.serverUrl) }
@@ -170,7 +182,9 @@ fun SettingsScreen(
             // 5. Ordenação Padrão da Lista de OS
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+                colors = appCardColors(),
+                border = appCardBorder(),
+                shape = MaterialTheme.shapes.large
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text("Ordenação Padrão da Lista de OS", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)

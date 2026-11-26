@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -43,6 +44,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.IconBadge
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import com.exemplo.oficina.domain.model.Servico
 import com.exemplo.oficina.ui.viewmodel.ServicoUiState
 import com.exemplo.oficina.ui.viewmodel.ServicoViewModel
@@ -82,9 +87,7 @@ fun ServicoScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         },
         floatingActionButton = {
@@ -166,7 +169,9 @@ fun ServicoCardItem(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             modifier = Modifier
@@ -174,12 +179,8 @@ fun ServicoCardItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Default.Work,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(end = 12.dp)
-            )
+            IconBadge(icon = Icons.Default.Work, tint = MaterialTheme.colorScheme.primary)
+            Spacer(modifier = Modifier.size(12.dp))
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = servico.nome, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleMedium)

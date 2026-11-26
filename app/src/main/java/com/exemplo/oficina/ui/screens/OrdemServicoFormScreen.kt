@@ -50,6 +50,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import androidx.compose.ui.unit.sp
 import com.exemplo.oficina.domain.model.OSServicoItem
 import com.exemplo.oficina.domain.model.StatusOS
@@ -98,9 +101,7 @@ fun OrdemServicoFormScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
@@ -269,7 +270,9 @@ fun OSFormItemCard(
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Row(
             modifier = Modifier

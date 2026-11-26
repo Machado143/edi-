@@ -49,6 +49,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.exemplo.oficina.ui.components.StatusBadgeComponent
+import com.exemplo.oficina.ui.components.appCardColors
+import com.exemplo.oficina.ui.components.appCardBorder
+import com.exemplo.oficina.ui.components.appTopBarColors
 import androidx.compose.ui.unit.sp
 import com.exemplo.oficina.domain.model.OrdemServico
 import com.exemplo.oficina.domain.model.StatusOS
@@ -95,9 +99,7 @@ fun OrdemServicoListScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar")
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
-                )
+                colors = appTopBarColors()
             )
         },
         floatingActionButton = {
@@ -118,6 +120,7 @@ fun OrdemServicoListScreen(
                 onValueChange = viewModel::onSearchQueryChange,
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
+                shape = MaterialTheme.shapes.large,
                 label = { Text("Buscar por placa ou cliente") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
@@ -225,7 +228,9 @@ fun OrdemServicoCardItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onClick() },
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
+        colors = appCardColors(),
+        border = appCardBorder(),
+        shape = MaterialTheme.shapes.large
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -287,24 +292,5 @@ fun OrdemServicoCardItem(
 
 @Composable
 fun StatusBadgeChip(status: String) {
-    val (bgColor, textColor) = when (status) {
-        StatusOS.ABERTA -> Color(0xFF2196F3) to Color.White
-        StatusOS.EM_ANDAMENTO -> Color(0xFFFF9800) to Color.White
-        StatusOS.FINALIZADA -> Color(0xFF4CAF50) to Color.White
-        StatusOS.CANCELADA -> Color(0xFFF44336) to Color.White
-        else -> Color.Gray to Color.White
-    }
-
-    Surface(
-        color = bgColor,
-        shape = RoundedCornerShape(12.dp)
-    ) {
-        Text(
-            text = status,
-            color = textColor,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-        )
-    }
+    StatusBadgeComponent(status = status)
 }
